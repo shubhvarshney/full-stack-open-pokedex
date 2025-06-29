@@ -18,7 +18,7 @@ jobs:
       - name: Check style 
         run: npm run eslint
       - name: Build app
-        run: npm run start-prod
+        run: npm run build
       - name: Test Pages
         run: npm run test
         
