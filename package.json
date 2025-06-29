@@ -59,7 +59,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
-      "tests"
+      "e2e_tests"
     ]
   }
 }
