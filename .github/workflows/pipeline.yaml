@@ -13,6 +13,7 @@ env:
 
 jobs:
   simple_deployment_pipeline:
+    name: deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +42,7 @@ jobs:
         if: ${{ github.env.CONDITION == 'true' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
+    name: tag
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
