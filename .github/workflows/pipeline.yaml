@@ -53,5 +53,14 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+      - name: Discord Webhook Notify
+        if: ${{ github.env.CONDITION == 'true' && success() }}
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          color: '#ff00aa'
+          text: 'A new version of Pokedex deployed'
+          description: 'to https://pokedex-b0tk.onrender.com/ by shubhvarshney'
 
 
