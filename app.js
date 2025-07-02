@@ -9,8 +9,8 @@ app.get('/version', (req, res) => {
   res.send('8')
 })
 
-app.get('/health', (_req, _res) => {
-  //res.send('ok')
+app.get('/health', (req, res) => {
+  res.send('bad')
   throw new Error('Health check failed')
 })
 
