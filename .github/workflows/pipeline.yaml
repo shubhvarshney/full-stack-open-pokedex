@@ -67,11 +67,13 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: |
             ${{ toJson({
-              "embeds": [{
-                "title": "to https://pokedex-b0tk.onrender.com/ by shubhvarshney",
-                "description": "Severity: informational",
-                "color": 16777215,
-              }]
+              "embeds": [
+                {
+                  "title": "to https://pokedex-b0tk.onrender.com/ by shubhvarshney",
+                  "description": "Severity: informational",
+                  "color": 16777215,
+                }
+              ]
             }) }}
         uses: Ilshidur/action-discord@master
         with:
