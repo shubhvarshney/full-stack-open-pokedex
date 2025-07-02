@@ -63,10 +63,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
       - name: Discord notification
+        uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: ${{ toJson([{"title":"to https://pokedex-b0tk.onrender.com/ by shubhvarshney","description":"Severity: informational","color":16777215}]) }}
-        uses: Ilshidur/action-discord@master
+          DISCORD_EMBEDS: ${{ toJson([{"title":"to https://pokedex-b0tk.onrender.com/ by shubhvarshney","description":"Severity informational","color":16777215}]) }}
         with:
           args: 'A new version of Pokedex deployed'
 
