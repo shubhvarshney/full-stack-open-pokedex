@@ -48,7 +48,7 @@ jobs:
           severity: error
           color: '#ff0000'
           text: 'Build failed'
-          description: 'commit ${{ GITHUB_SERVER_URL }/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA} by shubhvarshney broke the build :('
+          description: 'commit ${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}/commit/${{ GITHUB_SHA }} by shubhvarshney broke the build :('
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     name: tag
