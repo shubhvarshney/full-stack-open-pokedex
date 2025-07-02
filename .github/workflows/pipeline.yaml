@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Check webhook secret
-        run: echo "Webhook ${{ secrets.DISCORD_WEBHOOK || 'EMPTY' }}"
+        run: echo "Webhook ${{ secrets.DISCORD_WEBHOOK }}"
       - name: Check style 
         run: npm run eslint
       - name: Build app
@@ -64,14 +64,18 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: Notify Success
-        if: ${{ env.CONDITION == 'true' && success() }}
-        uses: rjstone/discord-webhook-notify@v2
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ toJson({
+            "embeds": [{
+              "title": "to https://pokedex-b0tk.onrender.com/ by shubhvarshney",
+              "description": "Severity: informational",
+              "color": 16777215,
+            }]
+          }) }}
+        uses: Ilshidur/action-discord@master
         with:
-          severity: info
-          color: '#ff00aa'
-          text: 'A new version of Pokedex deployed'
-          description: 'to https://pokedex-b0tk.onrender.com/ by shubhvarshney'
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'A new version of Pokedex deployed'
 
 
