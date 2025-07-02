@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Check webhook secret
-        run: echo "Webhook: ${{ secrets.DISCORD_WEBHOOK || 'EMPTY' }}"
+        run: echo "Webhook ${{ secrets.DISCORD_WEBHOOK || 'EMPTY' }}"
       - name: Check style 
         run: npm run eslint
       - name: Build app
@@ -50,7 +50,7 @@ jobs:
           severity: error
           color: '#ff0000'
           text: 'Build failed'
-          description: 'commit ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA} by shubhvarshney broke the build :('
+          description: 'commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by shubhvarshney broke the build :('
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     name: tag
