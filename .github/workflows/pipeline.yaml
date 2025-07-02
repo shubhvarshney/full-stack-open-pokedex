@@ -22,8 +22,6 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm install
-      - name: Check webhook secret
-        run: echo "Webhook ${{ secrets.DISCORD_WEBHOOK }}"
       - name: Check style 
         run: npm run eslint
       - name: Build app
