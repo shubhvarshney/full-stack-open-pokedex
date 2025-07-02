@@ -41,8 +41,6 @@ jobs:
       - name: Trigger Deployment
         if: ${{ env.CONDITION == 'true' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-      - name: Set ISO timestamp
-        run: echo "ISO_TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
       - name: Notify Failure
         if: ${{ failure() }}
         uses: Ilshidur/action-discord@master
@@ -53,7 +51,6 @@ jobs:
               {
                 "description": "commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by shubhvarshney broke the build :(",
                 "footer": { "text": "Severity: Error" },
-                "timestamp": "${{ env.ISO_TIMESTAMP }}",
                 "color": 16711680
               }
             ]
@@ -82,7 +79,6 @@ jobs:
               {
                 "description": "to https://pokedex-b0tk.onrender.com/ by shubhvarshney",
                 "footer": { "text": "Severity: Informational" },
-                "timestamp": "${{ env.ISO_TIMESTAMP }}",
                 "color": 65280
               }
             ]
