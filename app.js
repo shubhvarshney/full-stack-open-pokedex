@@ -10,8 +10,7 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  res.send('try health check')
-  throw new Error('Health check failed')
+  res.status(500).end()
 })
 
 app.listen(PORT, () => {
