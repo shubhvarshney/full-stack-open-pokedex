@@ -43,13 +43,11 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify Failure
         if: ${{ failure() }}
-        uses: rjstone/discord-webhook-notify@v2
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          severity: error
-          color: '#ff0000'
-          text: 'Build failed'
-          description: 'commit ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA} by shubhvarshney broke the build :('
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'Build failed: commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by shubhvarshney broke the build :('
   tag_release:
     name: tag
     needs: [simple_deployment_pipeline]
@@ -64,12 +62,10 @@ jobs:
           DEFAULT_BUMP: patch
       - name: Notify Success
         if: ${{ env.CONDITION == 'true' && success() }}
-        uses: rjstone/discord-webhook-notify@v2
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          severity: info
-          color: '#ff00aa'
-          text: 'A new version of Pokedex deployed'
-          description: 'to https://pokedex-b0tk.onrender.com/ by shubhvarshney'
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'A new version of Pokedex deployed'
 
 
