@@ -73,8 +73,8 @@ jobs:
                 color: 16777215
               }
             ]) }}
-          uses: Ilshidur/action-discord@master
-          with:
-            args: 'A new version of Pokedex deployed'
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'A new version of Pokedex deployed'
 
 
