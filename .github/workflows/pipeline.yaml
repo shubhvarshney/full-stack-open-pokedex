@@ -41,12 +41,14 @@ jobs:
       - name: Trigger Deployment
         if: ${{ env.CONDITION == 'true' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Set ISO timestamp
+        run: echo "ISO_TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
       - name: Notify Failure
         if: ${{ failure() }}
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"description":"commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by shubhvarshney broke the build :(","footer":"Severity: Error","timestamp": "${{ Date.now().toISOString() }}","color":16711680}]'
+          DISCORD_EMBEDS: '[{"description":"commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by shubhvarshney broke the build :(","footer":"Severity: Error","timestamp": "${{ env.ISO_TIMESTAMP }}","color":16711680}]'
         with:
           args: 'Build failed'
   tag_release:
@@ -66,7 +68,7 @@ jobs:
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"description":"to https://pokedex-b0tk.onrender.com/ by shubhvarshney","footer":"Severity: Informational", "timestamp": "${{ Date.now().toISOString() }}", "color":65280}]'
+          DISCORD_EMBEDS: '[{"description":"to https://pokedex-b0tk.onrender.com/ by shubhvarshney","footer":"Severity: Informational", "timestamp": "${{ env.ISO_TIMESTAMP }}", "color":65280}]'
         with:
           args: 'A new version of Pokedex deployed'
 
