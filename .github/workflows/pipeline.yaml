@@ -65,6 +65,7 @@ jobs:
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[{"title":"to https://pokedex-b0tk.onrender.com/ by shubhvarshney","description":"Severity: Informational","color":65280}]'
         with:
           args: 'A new version of Pokedex deployed'
 
