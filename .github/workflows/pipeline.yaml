@@ -48,7 +48,7 @@ jobs:
           severity: error
           color: '#ff0000'
           text: 'Build failed'
-          description: 'commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by shubhvarshney broke the build :('
+          description: 'commit ${{ GITHUB_SERVER_URL }/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA} by shubhvarshney broke the build :('
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     name: tag
@@ -62,12 +62,14 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: Discord notification
-        uses: Ilshidur/action-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: ${{ toJson([{"title":"to https://pokedex-b0tk.onrender.com/ by shubhvarshney","description":"Severity informational","color":16777215}]) }}
+      - name: Notify Success
+        if: ${{ env.CONDITION == 'true' && success() }}
+        uses: rjstone/discord-webhook-notify@v2
         with:
-          args: 'A new version of Pokedex deployed'
+          severity: info
+          color: '#ff00aa'
+          text: 'A new version of Pokedex deployed'
+          description: 'to https://pokedex-b0tk.onrender.com/ by shubhvarshney'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
 
