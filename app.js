@@ -3,10 +3,7 @@ const app = express()
 
 const PORT = process.env.PORT || 5000
 
-//app.use(express.static('dist'))
-app.get('/', (req, res) => {
-  res.status(500).end()
-})
+app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
   res.send('8')
@@ -14,6 +11,10 @@ app.get('/version', (req, res) => {
 
 app.get('/health', (req, res) => {
   res.send('ok')
+})
+
+app.get('/health2', (req, res) => {
+  res.status(500).end()
 })
 
 app.listen(PORT, () => {
