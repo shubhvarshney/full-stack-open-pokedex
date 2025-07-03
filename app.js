@@ -14,7 +14,8 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/health2', (req, res) => {
-  res.status(500).end()
+  res.send('ok for now')
+  // res.status(500).end()
 })
 
 app.listen(PORT, () => {
