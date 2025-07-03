@@ -10,6 +10,10 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
+app.get('/health2', (req, res) => {
   res.status(500).end()
 })
 
